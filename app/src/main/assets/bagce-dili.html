@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BAĞÇE dili — gilas oyun meydançası</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 1.5rem;
+    background: #f7f6f2;
+    color: #2c2c2a;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    max-width: 680px;
+    margin: 0 auto;
+  }
+  h1 { font-size: 20px; font-weight: 500; margin-bottom: 0.25rem; }
+  p.sub { color: #5f5e5a; font-size: 14px; margin-top: 0; margin-bottom: 1.25rem; }
+  .tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 1.25rem; }
+  .tag { font-size: 12px; padding: 4px 10px; border-radius: 8px; background: #eee; color: #444; }
+  .tag.accent { background: #e6f1fb; color: #0c447c; }
+  .tag.pro { background: #eeedfe; color: #26215c; }
+  .tag.success { background: #eaf3de; color: #173404; }
+  textarea {
+    width: 100%; height: 260px; font-family: "SFMono-Regular", Consolas, monospace;
+    font-size: 13px; padding: 12px; border-radius: 8px; border: 1px solid #ddd;
+    resize: vertical; background: #fff;
+  }
+  .buttons { display: flex; gap: 8px; margin: 12px 0 1.5rem; }
+  button {
+    border: 1px solid #ccc; background: #fff; padding: 10px 16px;
+    border-radius: 8px; font-size: 14px; cursor: pointer;
+  }
+  button:hover { background: #f0f0ee; }
+  #out {
+    background: #eee; border-radius: 8px; padding: 1rem; min-height: 80px;
+    font-family: "SFMono-Regular", Consolas, monospace; font-size: 13px;
+    line-height: 1.8; white-space: pre-wrap;
+  }
+  .row { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
+  .row.season { color: #5f5e5a; margin-top: 10px; }
+  .icon { font-size: 15px; }
+</style>
+</head>
+<body>
+
+<h1>BAĞÇE dili</h1>
+<p class="sub">Gilas becərməyə əsaslanan kiçik proqramlaşdırma dili</p>
+
+<div class="tags">
+  <span class="tag accent">tinglə</span>
+  <span class="tag pro">calağla</span>
+  <span class="tag">sula</span>
+  <span class="tag">fəsil</span>
+  <span class="tag">əgər çiçək açsa</span>
+  <span class="tag">budala</span>
+  <span class="tag success">yığ</span>
+</div>
+
+<textarea id="code" spellcheck="false">kötük tinglə VSL2 = 100
+
+calağla VSL2 ilə Carmen:
+    məhsul yüksək
+    yetişmə orta_erkən
+
+fəsil yaz_başı {
+    sula VSL2 6
+    əgər çiçək açsa VSL2:
+        budala zəif_budaqlar
+}
+
+fəsil yay {
+    sula VSL2 9
+    budala kölgə_salan_zoğlar
+}
+
+fəsil yay_sonu {
+    yığ VSL2
+}</textarea>
+
+<div class="buttons">
+  <button id="run">▶ İşə sal</button>
+  <button id="reset">Sıfırla</button>
+</div>
+
+<div id="out">İşə salmaq üçün "İşə sal" düyməsinə bas.</div>
+
+<script>
+const ICONS = {
+  seed: "🌱", graft: "🔀", chart: "📊", clock: "⏱", calendar: "📅",
+  drop: "💧", flower: "🌸", scissors: "✂️", cherry: "🍒"
+};
+
+function parseAndRun(code){
+  const lines = code.split("\n").map(l => l.trim()).filter(Boolean);
+  const log = [];
+  for (const line of lines){
+    if (line.startsWith("kötük tinglə")){
+      const m = line.match(/kötük tinglə (\w+) = (\d+)/);
+      if (m) log.push({icon: ICONS.seed, text: "kötük tingləndi: " + m[1] + " (" + m[2] + " ədəd)"});
+    } else if (line.startsWith("calağla")){
+      const m = line.match(/calağla (\w+) ilə (\w+)/);
+      if (m) log.push({icon: ICONS.graft, text: m[2] + " sortu " + m[1] + " kötüyünə calaqlandı"});
+    } else if (line.startsWith("məhsul")){
+      const m = line.match(/məhsul (\w+)/);
+      if (m) log.push({icon: ICONS.chart, text: "gözlənilən məhsul: " + m[1]});
+    } else if (line.startsWith("yetişmə")){
+      const m = line.match(/yetişmə (\w+)/);
+      if (m) log.push({icon: ICONS.clock, text: "yetişmə dövrü: " + m[1].replace("_"," ")});
+    } else if (line.startsWith("fəsil")){
+      const s = line.replace("fəsil","").replace("{","").trim();
+      log.push({icon: ICONS.calendar, text: "— fəsil: " + s.replace("_"," ") + " —", season: true});
+    } else if (line.startsWith("sula")){
+      const m = line.match(/sula (\w+) (\d+)/);
+      if (m) log.push({icon: ICONS.drop, text: m[1] + " suvarıldı (+" + m[2] + " litr)"});
+    } else if (line.startsWith("əgər çiçək açsa")){
+      const m = line.match(/əgər çiçək açsa (\w+)/);
+      if (m) log.push({icon: ICONS.flower, text: m[1] + " çiçək açdı"});
+    } else if (line.startsWith("budala")){
+      const m = line.match(/budala (\w+)/);
+      if (m) log.push({icon: ICONS.scissors, text: m[1].replace("_"," ") + " budandı"});
+    } else if (line.startsWith("yığ")){
+      const m = line.match(/yığ (\w+)/);
+      if (m) log.push({icon: ICONS.cherry, text: m[1] + " yığıldı — Carmen gilasları səbətdə!"});
+    }
+  }
+  return log;
+}
+
+document.getElementById("run").addEventListener("click", () => {
+  const code = document.getElementById("code").value;
+  const log = parseAndRun(code);
+  const out = document.getElementById("out");
+  out.innerHTML = "";
+  log.forEach((item, i) => {
+    setTimeout(() => {
+      const row = document.createElement("div");
+      row.className = "row" + (item.season ? " season" : "");
+      row.innerHTML = '<span class="icon">' + item.icon + '</span><span>' + item.text + '</span>';
+      out.appendChild(row);
+    }, i * 350);
+  });
+});
+
+document.getElementById("reset").addEventListener("click", () => {
+  document.getElementById("out").textContent = 'İşə salmaq üçün "İşə sal" düyməsinə bas.';
+});
+</script>
+
+</body>
+</html>
