@@ -1,48 +1,19 @@
-# BAĞÇE dili — Android APK
+# Bağçə Dili
 
-Bu layihə "BAĞÇE dili" proqramlaşdırma dilinin Android tətbiqi üçün APK faylıdır.
+Bu Android tətbiqidir.
 
-## Qurulma
+## Qurashdırma
 
-### Tələblər
-- Android Studio 2022.1 və ya daha yeni
-- Android SDK 21+ (minimum API level)
-- Java 11 və ya daha yeni
+1. Android Studio-nu açın
+2. Proyekti klonlayın və açın
+3. Build edin və çalıştırın
 
-### Addımlar
+## Versiya
 
-1. **Layihəni klonlayın:**
-   ```bash
-   git clone https://github.com/samirnov1614-cyber/bagce-dili.git
-   cd bagce-dili
-   ```
+- App Version: 1.0.0
+- Min SDK: 21
+- Target SDK: 34
 
-2. **Android Studio-da açın:**
-   - Android Studio açın
-   - "Open an existing Android Studio project" seçin
-   - Layihə qovluğunu seçin
+## Lisenziaya
 
-3. **APK-ı qurğu əmrləri ilə yaradın:**
-   ```bash
-   ./gradlew assembleRelease
-   ```
-
-   APK faylı buradadır:
-   ```
-   app/build/outputs/apk/release/app-release.apk
-   ```
-
-4. **Emulator-da test edin:**
-   - Android Studio-da emulator başlatın
-   - Layihənin üzərində sağ klikləyin və "Run" seçin
-
-## Xüsusiyyətlər
-
-✅ Tam JavaScript dəstəyi  
-✅ UTF-8 Azərbaycanca dil dəstəyi  
-✅ WebView ilə HTML render etmə  
-✅ Offline mod (assets-dən yüklənir)  
-
-## Lisenziya
-
-MIT
+MIT License

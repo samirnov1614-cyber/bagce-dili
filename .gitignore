@@ -1,26 +1,21 @@
 # Gradle files
 .gradle/
 build/
+*.jks
+*.keystore
+
+# Android Studio
+.idea/
+.DS_Store
+*.iml
+*.apk
+*.ap_
+*.dex
+*.class
 
 # Local configuration file
 local.properties
 
-# IDE
-.idea/
-*.iml
-*.iws
-*.ipr
-
-# OS
-.DS_Store
-Thumbs.db
-
-# Built application files
-*.apk
-*.aar
-*.ap_
-
-# Generated files
-bin/
-gen/
-out/
+# Gradle wrapper
+!gradle/wrapper/gradle-wrapper.jar
+!gradle/wrapper/gradle-wrapper.properties
