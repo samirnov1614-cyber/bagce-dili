@@ -34,7 +34,7 @@ PRG_DIR=`dirname "$PRG"`
 APP_HOME=`cd "$PRG_DIR/." >/dev/null 2>&1 && pwd`
 
 # Add default JVM options here. You can also use JAVA_OPTS and GRADLE_OPTS to pass JVM options to this script.
-DEFAULT_JVM_OPTS='" "-Xmx64m" "-Xms64m"'
+DEFAULT_JVM_OPTS='"-Xmx64m" "-Xms64m"'
 
 # Use the maximum available, or set MAX_FD != nothing to use that value.
 MAX_FD="maximum"
@@ -66,18 +66,7 @@ case "`uname`" in
   MINGW* )
     IS_MINGW=true
     ;;
-esi
-
-# Attempt to set APP_HOME
-# Resolve links: $0 may be a symlink
-PRG="$0"
-# Need this for relative symlinks.
-while [ -h "$PRG" ] ; do
-    ls -ld "$PRG"
-    PRG=`readlink "$PRG"`
-done
-PRG_DIR=`dirname "$PRG"`
-APP_HOME=`cd "$PRG_DIR/." >/dev/null 2>&1 && pwd`
+esac
 
 # Determine the Java command to use to start the JVM.
 if [ -n "$JAVA_HOME" ] ; then
