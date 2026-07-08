@@ -43,7 +43,7 @@ configurations.all {
         force 'androidx.appcompat:appcompat:1.6.1'
     }
 }
-    lintOptions {
+    lint {
         checkReleaseBuilds false
         abortOnError false
     }
