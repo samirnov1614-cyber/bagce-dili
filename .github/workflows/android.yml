@@ -25,7 +25,8 @@ jobs:
         gradle-version: '8.5'
 
     - name: Build Debug APK
-      run: gradle assembleDebug --stacktrace --warning-mode none
+      run: gradle assembleDebug -Pandroid.experimental.sdk.channel=0 --warning-mode none
+
 
 
     - name: Upload APK Artifact
