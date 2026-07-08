@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace 'com.example.bagcedili' // Kendi paket adınız farklıysa burayı değiştirebilirsiniz
+    namespace 'samirnov1614.cyber.bagcedili' // Hata almamak için GitHub kullanıcı adınıza göre güncellendi
     compileSdk 34
 
     defaultConfig {
-        applicationId "com.example.bagcedili" // Kendi paket adınız farklıysa burayı değiştirebilirsiniz
+        applicationId "samirnov1614.cyber.bagcedili"
         minSdk 24
         targetSdk 34
         versionCode 1
@@ -39,4 +39,3 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 }
-    
