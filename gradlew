@@ -65,3 +65,4 @@ JVM_OPTS="$DEFAULT_JVM_OPTS $GRADLE_OPTS $JAVA_OPTS"
 
 # Exec the wrapper
 exec "$JAVACMD" $JVM_OPTS -cp "$CLASSPATH" org.gradle.wrapper.GradleWrapperMain "$@"
+gradle wrapper && git add -f gradle/wrapper/gradle-wrapper.jar && git commit -m "Fix: Add missing gradle-wrapper.jar" && git push
